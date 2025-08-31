@@ -3,195 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>心灵解忧盲盒 (精修最终版)</title>
+    <title>心灵解忧盲盒 (最终版)</title>
     <style>
-        /* --- 引入标准字体 --- */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
-
-        /* --- 色彩体系 (保持不变) --- */
-        :root {
-            --bg-color: #FFFBF5;
-            --text-color: #5D534A;
-            --primary-color: #A8B8A6;
-            --card-bg: #FFFFFF;
-            --hover-glow: rgba(168, 184, 166, 0.3);
-            /* 修改点：统一使用标准字体 */
-            --body-font: 'Noto Sans SC', sans-serif;
-        }
-
-        body {
-            font-family: var(--body-font);
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle, #FFFFFF 0%, var(--bg-color) 100%);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            -webkit-font-smoothing: antialiased;
-        }
+        :root { --bg-color: #FFFBF5; --text-color: #5D534A; --primary-color: #A8B8A6; --card-bg: #FFFFFF; --hover-glow: rgba(168, 184, 166, 0.3); --body-font: 'Noto Sans SC', sans-serif; }
+        body { font-family: var(--body-font); background-color: var(--bg-color); background-image: radial-gradient(circle, #FFFFFF 0%, var(--bg-color) 100%); color: var(--text-color); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; -webkit-font-smoothing: antialiased; }
         .container { width: 100%; max-width: 500px; position: relative; }
         .screen { display: none; animation: fadeIn 0.8s ease-in-out; }
         .screen.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- 元素风格优化 (字体统一) --- */
-        h1, h2, h3 { font-family: var(--body-font); } /* 确保所有标题都使用标准字体 */
-        h1 { font-size: 2.5rem; font-weight: 500; margin-bottom: 10px; color: #4a423b; }
-        h2 { font-size: 2rem; font-weight: 500; margin-bottom: 20px; line-height: 1.6; }
-        h3 { font-weight: 500; }
-        p { font-size: 1rem; color: #7c7165; line-height: 1.8; margin-bottom: 30px; }
-        
-        .btn { background-color: var(--primary-color); color: white; border: none; border-radius: 50px; padding: 16px 40px; font-size: 1.1rem; font-family: var(--body-font); font-weight: 500; cursor: pointer; transition: all 0.3s ease; display: inline-block; text-decoration: none; box-shadow: 0 4px 15px rgba(168, 184, 166, 0.2); }
-        .btn:hover { transform: translateY(-4px); box-shadow: 0 8px 25px var(--hover-glow); }
-
+        h1, h2, h3 { font-family: var(--body-font); } h1 { font-size: 2.5rem; font-weight: 500; margin-bottom: 10px; color: #4a423b; } h2 { font-size: 2rem; font-weight: 500; margin-bottom: 20px; line-height: 1.6; } h3 { font-weight: 500; } p { font-size: 1rem; color: #7c7165; line-height: 1.8; margin-bottom: 30px; }
+        .btn { background-color: var(--primary-color); color: white; border: none; border-radius: 50px; padding: 16px 40px; font-size: 1.1rem; font-family: var(--body-font); font-weight: 500; cursor: pointer; transition: all 0.3s ease; display: inline-block; text-decoration: none; box-shadow: 0 4px 15px rgba(168, 184, 166, 0.2); } .btn:hover { transform: translateY(-4px); box-shadow: 0 8px 25px var(--hover-glow); }
         .choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
-        .card, .option-btn { background-color: var(--card-bg); border-radius: 18px; padding: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #f0ebe4; }
-        .card:hover, .option-btn:hover { transform: translateY(-6px); box-shadow: 0 10px 30px var(--hover-glow); }
-        .card h3 { margin: 0 0 8px 0; font-size: 1.3rem; color: #5D534A;}
-        .card p { font-size: 0.9rem; margin: 0; color: #a09489; }
-        .option-list { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .option-btn { text-align: left; font-size: 1rem; padding: 22px; }
-        
+        .card, .option-btn { background-color: var(--card-bg); border-radius: 18px; padding: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #f0ebe4; } .card:hover, .option-btn:hover { transform: translateY(-6px); box-shadow: 0 10px 30px var(--hover-glow); }
+        .card h3 { margin: 0 0 8px 0; font-size: 1.3rem; color: #5D534A;} .card p { font-size: 0.9rem; margin: 0; color: #a09489; }
+        .option-list { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; } .option-btn { text-align: left; font-size: 1rem; padding: 22px; }
         .result-card { background-color: var(--card-bg); border-radius: 20px; padding: 40px; animation: breathing 5s ease-in-out infinite; box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
         @keyframes breathing { 0% { box-shadow: 0 8px 40px rgba(168, 184, 166, 0.1); } 50% { box-shadow: 0 12px 45px rgba(168, 184, 166, 0.2); } 100% { box-shadow: 0 8px 40px rgba(168, 184, 166, 0.1); } }
-        .result-card .content p { animation: fadeInText 1.5s ease-in-out forwards; opacity: 0; }
-        .result-card .content p:nth-child(1) { animation-delay: 0.5s; } .result-card .content p:nth-child(2) { animation-delay: 1.5s; } .result-card .content p:nth-child(3) { animation-delay: 2.8s; } .result-card .content p:nth-child(4) { animation-delay: 4s; }
+        .result-card .content p { animation: fadeInText 1.5s ease-in-out forwards; opacity: 0; } .result-card .content p:nth-child(1) { animation-delay: 0.5s; } .result-card .content p:nth-child(2) { animation-delay: 1.5s; } .result-card .content p:nth-child(3) { animation-delay: 2.8s; } .result-card .content p:nth-child(4) { animation-delay: 4s; }
         @keyframes fadeInText { to { opacity: 1; } }
-
         .button-group { border-top: 1px solid #f0ebe4; padding-top: 10px; margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 20px; }
-        .reveal-btn, .share-entry-btn {
-            display: inline-flex; /* 修改点：使用 flex 布局让图标和文字对齐 */
-            align-items: center;
-            gap: 8px; /* 修改点：图标和文字的间距 */
-            margin-top: 10px;
-            background: none;
-            border: none;
-            color: #98a695;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 10px;
-        }
-        .reveal-btn:hover, .share-entry-btn:hover { color: #7f8d7c; }
-        .reveal-btn svg, .share-entry-btn svg {
-            width: 1em; /* 让图标大小随字体大小变化 */
-            height: 1em;
-            transition: transform 0.4s ease; /* 修改点：为箭头旋转增加动画 */
-        }
-        .reveal-btn svg.rotated {
-            transform: rotate(180deg); /* 修改点：箭头旋转样式 */
-        }
-
-        .actions-container { max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out, margin-top 0.7s ease-in-out; text-align: left; }
-        .actions-container.visible { max-height: 500px; margin-top: 20px; }
-        .action-item { background: #fdfaf6; border-left: 3px solid var(--primary-color); padding: 15px; margin-bottom: 10px; border-radius: 0 8px 8px 0; }
-        .action-item h4 { margin: 0 0 5px 0; font-family: var(--body-font); font-weight: 500; color: #5D534A;}
-        .action-item p { font-size: 0.9rem; margin: 0; color: #a09489;}
-
-        .share-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(93, 83, 74, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-        .share-overlay.visible { opacity: 1; visibility: visible; }
-        .share-modal { background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 400px; transform: scale(0.9); transition: transform 0.3s ease; }
-        .share-overlay.visible .share-modal { transform: scale(1); }
-        .share-modal h3 { font-family:var(--body-font); font-weight: 500; margin-top: 0; margin-bottom: 10px; font-size: 1.8rem; }
-        .share-modal p { margin-bottom: 30px; color: #7c7165; }
-        .share-icons { display: flex; justify-content: space-around; margin-bottom: 30px; }
-        .share-icon { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: #666; text-decoration: none; }
-        .share-icon svg { width: 50px; height: 50px; margin-bottom: 10px; }
-        .share-icon span { font-size: 0.9rem; color: #a09489;}
-        .copy-link-btn { display: block; width: 100%; background-color: #f5f1ec; color: var(--text-color); border: none; padding: 15px; border-radius: 10px; font-size: 1rem; cursor: pointer; transition: background-color 0.2s; }
-        .copy-link-btn:hover { background-color: #e9e3da; }
+        .reveal-btn, .share-entry-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; background: none; border: none; color: #98a695; font-size: 1rem; cursor: pointer; font-weight: 500; transition: color 0.3s; padding: 10px; } .reveal-btn:hover, .share-entry-btn:hover { color: #7f8d7c; }
+        .reveal-btn svg, .share-entry-btn svg { width: 1em; height: 1em; transition: transform 0.4s ease; } .reveal-btn svg.rotated { transform: rotate(180deg); }
+        .actions-container { max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out, margin-top 0.7s ease-in-out; text-align: left; } .actions-container.visible { max-height: 500px; margin-top: 20px; }
+        .action-item { background: #fdfaf6; border-left: 3px solid var(--primary-color); padding: 15px; margin-bottom: 10px; border-radius: 0 8px 8px 0; } .action-item h4 { margin: 0 0 5px 0; font-family: var(--body-font); font-weight: 500; color: #5D534A;} .action-item p { font-size: 0.9rem; margin: 0; color: #a09489;}
+        .share-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(93, 83, 74, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; } .share-overlay.visible { opacity: 1; visibility: visible; }
+        .share-modal { background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 400px; transform: scale(0.9); transition: transform 0.3s ease; } .share-overlay.visible .share-modal { transform: scale(1); }
+        .share-modal h3 { font-family:var(--body-font); font-weight: 500; margin-top: 0; margin-bottom: 10px; font-size: 1.8rem; } .share-modal p { margin-bottom: 30px; color: #7c7165; }
+        .share-icons { display: flex; justify-content: space-around; margin-bottom: 30px; } .share-icon { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: #666; text-decoration: none; }
+        .share-icon svg { width: 50px; height: 50px; margin-bottom: 10px; } .share-icon span { font-size: 0.9rem; color: #a09489;}
+        .copy-link-btn { display: block; width: 100%; background-color: #f5f1ec; color: var(--text-color); border: none; padding: 15px; border-radius: 10px; font-size: 1rem; cursor: pointer; transition: background-color 0.2s; } .copy-link-btn:hover { background-color: #e9e3da; }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <!-- 省略重复的HTML, 仅展示一个修改后的结果页结构来说明按钮的变化 -->
-    <!-- 实际使用时请复制下方完整代码 -->
     <div id="screen-start" class="screen active"><h1>嘿，别担心，我们聊聊。</h1><p>通过几个简单的选择，找到一些可能的方向。这只是一个温柔的参考，希望能给你带来片刻的平静。</p><a href="#" class="btn" onclick="showScreen('screen-emotion-choice')">开始探索 →</a></div>
     <div id="screen-emotion-choice" class="screen"><h2>那么，此刻你的感觉，更接近哪一种？</h2><div class="choice-grid"><div class="card" onclick="showScreen('screen-anxious-reason')"><h3>焦躁不安</h3><p>内心像有一团火，坐立难安</p></div><div class="card" onclick="showScreen('screen-down-reason')"><h3>低落疲惫</h3><p>感觉一切都提不起劲，有点空</p></div><div class="card" onclick="showScreen('screen-lost-reason')"><h3>迷茫困惑</h3><p>思绪很乱，不知下一步该做什么</p></div><div class="card" onclick="showScreen('screen-stressed-reason')"><h3>紧绷压力</h3><p>感觉自己像一根快要绷断的弦</p></div></div></div>
     <div id="screen-anxious-reason" class="screen"><h2>我理解这种感觉。这份焦躁，它的源头更偏向于哪里呢？</h2><div class="option-list"><div class="option-btn" onclick="showScreen('result-anxious-future')">脑海里总是盘旋着“未来会怎样”的担忧</div><div class="option-btn" onclick="showScreen('result-anxious-past')">反复回想已经发生的事，觉得“当时如果…”就好了</div><div class="option-btn" onclick="showScreen('result-anxious-tasks')">感觉有无数件事压着我，但又不知从何下手</div></div></div>
     <div id="screen-down-reason" class="screen"><h2>这种感觉很消耗人。这份低落，更多是来自…</h2><div class="option-list"><div class="option-btn" onclick="showScreen('result-down-meaning')">感觉做什么都失去了意义和乐趣</div><div class="option-btn" onclick="showScreen('result-down-social')">与人交往让我感觉很疲惫</div><div class="option-btn" onclick="showScreen('result-down-empty')">说不清为什么，就是感觉身心都被掏空了</div></div></div>
     <div id="screen-lost-reason" class="screen"><h2>像是走在雾里一样。这份迷茫，主要是关于…</h2><div class="option-list"><div class="option-btn" onclick="showScreen('result-lost-crossroads')">站在人生的十字路口，不知道该选哪条路</div><div class="option-btn" onclick="showScreen('result-lost-wants')">不太确定自己内心深处到底想要什么</div><div class="option-btn" onclick="showScreen('result-lost-stuck')">感觉生活日复一日，被困在了原地</div></div></div>
     <div id="screen-stressed-reason" class="screen"><h2>这根弦绷得太久了。这份压力，更多是因为…</h2><div class="option-list"><div class="option-btn" onclick="showScreen('result-stressed-expectations')">来自外界的期望让我喘不过气</div><div class="option-btn" onclick="showScreen('result-stressed-perfection')">总是担心自己做得不够好，追求完美</div><div class="option-btn" onclick="showScreen('result-stressed-control')">感觉很多事情都超出了我的控制</div></div></div>
-    
-    <!-- 结果页结构 (所有12个结果页均已按此新结构修改) -->
-    <div id="result-anxious-future" class="screen">
-        <div class="result-card">
-            <h2>致，为未来而忧虑的你</h2>
-            <div class="content"><p>总是望向远方，所以忽略了脚下的路，这很正常。对未来的不确定感到担忧，这恰恰说明了你内心的责任感和期许。</p><p>先别急着去寻找答案。</p><p>允许自己，就在此刻，什么都不去想。未来是由无数个‘现在’组成的。当我们能温柔地对待每一个‘现在’，未来自然会变得柔和起来。</p><p>深呼吸一次，感受一下脚踏实地的感觉。你已经很棒了。</p></div>
-            <div class="button-group">
-                <button class="reveal-btn" onclick="revealActions(this)">
-                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    <span>试试这些小方法</span>
-                </button>
-                <button class="share-entry-btn" onclick="showShareModal()">
-                    <svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-                    <span>分享这份温柔</span>
-                </button>
-            </div>
-            <div class="actions-container">
-                <div class="action-item"><h4>担忧投喂箱</h4><p>用10分钟，把你所有关于未来的担忧，无论大小，全部写下来，然后把这张纸收起来。这个行为本身就是一种释放。</p></div><div class="action-item"><h4>3分钟正念呼吸</h4><p>闭上眼，用鼻子缓缓吸气（4秒），屏住呼吸（4秒），用嘴缓缓呼气（6秒）。只专注于你的呼吸，重复3分钟，把注意力带回当下。</p></div><div class="action-item"><h4>锚定当下的一件事</h4><p>去做一件能让你完全专注的、简单的小事。比如，认真地为自己泡一杯茶，或整理书桌的一角。完成它，找回掌控感。</p></div>
-            </div>
-        </div>
-    </div>
-    <!-- ... 其他11个结果页的完整代码 ... (篇幅原因省略，实际代码已全部按新结构修改) -->
-    
-</div>
-
-<!-- 分享浮层 (HTML不变) -->
-<div id="share-overlay" class="share-overlay" onclick="hideShareModal(event)"><!-- ... --></div>
-
-<script>
-    // 脚本已更新，以支持图标旋转
-    function showScreen(screenId) {
-        const screens = document.querySelectorAll('.screen');
-        screens.forEach(screen => { screen.classList.remove('active'); });
-        const activeScreen = document.getElementById(screenId);
-        if (activeScreen) { activeScreen.classList.add('active'); }
-    }
-
-    function revealActions(buttonElement) {
-        const resultCard = buttonElement.closest('.result-card');
-        const actionsContainer = resultCard.querySelector('.actions-container');
-        const arrowIcon = buttonElement.querySelector('.arrow-icon');
-        const buttonText = buttonElement.querySelector('span');
-
-        actionsContainer.classList.toggle('visible');
-        arrowIcon.classList.toggle('rotated'); // 修改点：切换图标旋转样式
-
-        if (actionsContainer.classList.contains('visible')) {
-            buttonText.textContent = '收起小方法';
-        } else {
-            buttonText.textContent = '试试这些小方法';
-        }
-    }
-
-    const shareOverlay = document.getElementById('share-overlay');
-    function showShareModal() { if (shareOverlay) { shareOverlay.classList.add('visible'); } }
-    function hideShareModal(event) { if (event.target === shareOverlay) { shareOverlay.classList.remove('visible'); } }
-    function copyLink(button) { navigator.clipboard.writeText(window.location.href).then(() => { button.textContent = '已复制！'; setTimeout(() => { button.textContent = '复制链接'; }, 1500); }).catch(err => { alert('复制失败，您的浏览器可能不支持此功能。'); console.error('Copy failed', err); }); }
-</script>
-
-<!-- 
-    为了避免响应过长，上面的HTML部分省略了11个结果页的重复结构。
-    请复制下面的完整代码到你的文件中，它包含了所有页面的修改。
--->
-<template id="full_html_content">
-    <!-- 这里是上面显示的完整HTML代码，无需再次粘贴 -->
-    <!-- 此标签仅为标记，实际使用时请直接复制上面整个代码块 -->
-</template>
-
-<script>
-    // 这是一个辅助脚本，用于将完整的HTML内容加载到页面中
-    // 实际使用时，请直接复制上面的整个HTML代码块即可
-    const template = document.getElementById('full_html_content');
-    const fullHtml = `
-    <!-- HTML from v3.0, but with the new button structure in all 12 result cards -->
+    <div id="result-anxious-future" class="screen"><div class="result-card"><h2>致，为未来而忧虑的你</h2><div class="content"><p>总是望向远方，所以忽略了脚下的路，这很正常。对未来的不确定感到担忧，这恰恰说明了你内心的责任感和期许。</p><p>先别急着去寻找答案。</p><p>允许自己，就在此刻，什么都不去想。未来是由无数个‘现在’组成的。当我们能温柔地对待每一个‘现在’，未来自然会变得柔和起来。</p><p>深呼吸一次，感受一下脚踏实地的感觉。你已经很棒了。</p></div><div class="button-group"><button class="reveal-btn" onclick="revealActions(this)"><svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><span>试试这些小方法</span></button><button class="share-entry-btn" onclick="showShareModal()"><svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg><span>分享这份温柔</span></button></div><div class="actions-container"><div class="action-item"><h4>担忧投喂箱</h4><p>用10分钟，把你所有关于未来的担忧，无论大小，全部写下来，然后把这张纸收起来。这个行为本身就是一种释放。</p></div><div class="action-item"><h4>3分钟正念呼吸</h4><p>闭上眼，用鼻子缓缓吸气（4秒），屏住呼吸（4秒），用嘴缓缓呼气（6秒）。只专注于你的呼吸，重复3分钟，把注意力带回当下。</p></div><div class="action-item"><h4>锚定当下的一件事</h4><p>去做一件能让你完全专注的、简单的小事。比如，认真地为自己泡一杯茶，或整理书桌的一角。完成它，找回掌控感。</p></div></div></div></div>
     <div id="result-anxious-past" class="screen"><div class="result-card"><h2>致，被过去的回忆牵绊的你</h2><div class="content"><p>反复咀嚼过去，是因为我们太想对现在和未来的自己负责。但请记住，过去的故事是用来启迪我们的，不是用来惩罚我们的。</p><p>我们无法改变已经发生的剧本，但我们可以改变我们讲述这个故事的方式。</p><p>你已经从那段经历里幸存了下来，并且学到了东西。这就是成长。是时候，温柔地把目光，从后视镜上移开一会儿了。</p><p>你值得放下这份沉重。</p></div><div class="button-group"><button class="reveal-btn" onclick="revealActions(this)"><svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><span>试试这些小方法</span></button><button class="share-entry-btn" onclick="showShareModal()"><svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg><span>分享这份温柔</span></button></div><div class="actions-container"><div class="action-item"><h4>完成“故事”</h4><p>把那件懊恼的事，以及你从中得到的教训或感悟，写下来。然后在这段文字的末尾，认真地写上“（全文完）”。给它一个结局。</p></div><div class="action-item"><h4>“感谢过去”练习</h4><p>试着找出一个那段经历带给你的、无论多么微小的正面影响（比如让你更谨慎，或更懂得珍惜）。对自己说：“谢谢那段过去，让我成为了现在的我。”</p></div><div class="action-item"><h4>五感拉回现实</h4><p>当思绪陷入过去时，立刻停下，说出你周围看到的5样东西，听到的4种声音，感觉到的3样物体。这能强行将你的注意力拉回到此刻。</p></div></div></div></div>
     <div id="result-anxious-tasks" class="screen"><div class="result-card"><h2>致，被任务清单淹没的你</h2><div class="content"><p>当无数个“应该做”堆积在脑海里时，我们的大脑就会像一台同时打开了100个程序的电脑，最终结果就是卡住，什么都做不了。</p><p>这种不知从何下手的慌乱感，不是因为你懒，而是因为你的CPU过载了。</p><p>没关系，我们不需要一下子做完所有事。我们只需要，也只能够，做完“下一件”事。</p><p>让我们先把那100个程序关掉，只留下一个。</p></div><div class="button-group"><button class="reveal-btn" onclick="revealActions(this)"><svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><span>试试这些小方法</span></button><button class="share-entry-btn" onclick="showShareModal()"><svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg><span>分享这份温柔</span></button></div><div class="actions-container"><div class="action-item"><h4>大脑清空术</h4><p>把脑子里所有“要做”的事，不分大小，全部写到一张纸上。这个“倒垃圾”的过程，会瞬间减轻大脑的负担。</p></div><div class="action-item"><h4>两分钟规则</h4><p>从清单里，找出一件能在两分钟内完成的小事（比如回复一封邮件，洗一个杯子），立刻去做。完成它，你会获得宝贵的初始动力。</p></div><div class="action-item"><h4>只选“三件事”</h4><p>看着清单，问自己：“如果今天我只能做三件事，哪三件最重要？”把它们圈出来，然后专注在这三件事上。其他的，暂时忘掉。</p></div></div></div></div>
     <div id="result-down-meaning" class="screen"><div class="result-card"><h2>致，在寻找意义的你</h2><div class="content"><p>当生活褪去色彩，做什么都感觉没意思时，内心会感到一种巨大的空洞。请允许这种感觉存在，不要因为“提不起劲”而责备自己。</p><p>这可能是一个信号，提醒我们，内在的某些需求没有被满足。意义感不是一个需要去“寻找”的宏大宝藏，它往往藏在微小的行动和连接里。</p><p>我们不必强迫自己立刻变得充满激情。今天，我们只做一件事：去“体验”，而不是去“思考”。</p><p>感受，会是那束穿透迷雾的光。</p></div><div class="button-group"><button class="reveal-btn" onclick="revealActions(this)"><svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><span>试试这些小方法</span></button><button class="share-entry-btn" onclick="showShareModal()"><svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg><span>分享这份温柔</span></button></div><div class="actions-container"><div class="action-item"><h4>微小的好奇心</h4><p>找一件你曾经有点兴趣、但不“重要”的小事去做10分钟。比如看一段植物纪录片，听一首从未听过的语言的歌曲。不为任何目的，只为好奇。</p></div><div class="action-item"><h4>创造一个“作品”</h4><p>用积木搭个小东西，用手机拍一张窗外的云，或者只是重新排列一下桌面图标。完成一个有开头和结尾的、微小的创造，能带来实在的满足感。</p></div><div class="action-item"><h4>给予微小的善意</h4><p>为家里的植物浇水，给朋友的动态点个真诚的赞，或者给流浪动物喂食点。为别的生命创造一点价值，能点燃我们内心的火苗。</p></div></div></div></div>
@@ -204,9 +56,13 @@
     <div id="result-stressed-perfection" class="screen"><div class="result-card"><h2>致，追求完美的你</h2><div class="content"><p>追求卓越是一种优秀的品质，但追求完美，有时会变成一个无形的牢笼，让我们在“不够好”的恐惧中动弹不得。</p><p>你对自己有如此高的要求，恰恰证明了你的能力和潜力。但是，请允许自己“完成”，而不是“完美”。</p><p>一个“已完成”的80分作品，远比一个停留在脑海里的100分想法，更有力量。这个世界的美，恰恰在于它的不完美。</p><p>你，也是如此。</p></div><div class="button-group"><button class="reveal-btn" onclick="revealActions(this)"><svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><span>试试这些小方法</span></button><button class="share-entry-btn" onclick="showShareModal()"><svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg><span>分享这份温柔</span></button></div><div class="actions-container"><div class="action-item"><h4>设定“停止”闹钟</h4><p>在开始一项任务前，先设定一个明确的截止时间（比如用番茄钟工作25分钟）。时间一到，无论完成度如何，都强迫自己停下来，并认可当前的成果。</p></div><div class="action-item"><h4>拥抱“好够了”原则</h4><p>在做一件事时，不断问自己：“为了达到目的，这是否已经‘足够好了’？” 当答案是“是”的时候，就勇敢地画上句号。</p></div><div class="action-item"><h4>刻意犯个“无伤大雅”的错</h4><p>试着在一封不重要的邮件里故意留一个错别字，或者穿两只颜色略有不同的袜子出门。你会发现，天并没有塌下来。这能有效降低你对犯错的恐惧。</p></div></div></div></div>
     <div id="result-stressed-control" class="screen"><div class="result-card"><h2>致，为失控而焦虑的你</h2><div class="content"><p>我们都渴望能掌控自己的生活，但现实是，这个世界充满了我们无法控制的变数。当我们试图抓住那些本就抓不住的东西时，内心就会充满压力和无力感。</p><p>真正的强大，不是去控制一切，而是学会在无法控制的事情面前，保持内心的平静。</p><p>让我们做一个练习：把你能控制的事情，和不能控制的事情，分开。然后，把全部的精力，都投入到那个你能控制的小小圆圈里。</p><p>掌控你能掌控的，接纳你不能的。</p></div><div class="button-group"><button class="reveal-btn" onclick="revealActions(this)"><svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg><span>试试这些小方法</span></button><button class="share-entry-btn" onclick="showShareModal()"><svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg><span>分享这份温柔</span></button></div><div class="actions-container"><div class="action-item"><h4>画出“控制圈”</h4><p>画两个同心圆。在内圈，写下你“能控制”的事（如：我的态度、我的努力）。在外圈，写下你“不能控制”的事（如：别人的看法、事情的结果）。聚焦内圈。</p></div><div class="action-item"><h4>“最坏情况”预演</h4><p>问自己：“这件事最坏的结果是什么？” 然后再问：“如果真的发生了，我能怎么办？” 你会发现，即使最坏的情况，你通常也有应对的办法。这能大大减轻恐惧。</p></div><div class="action-item"><h4>寻找一个“控制锚点”</h4><p>去做一件你完全可以掌控结果的、有秩序感的小事。比如，整理一个抽屉，或者按照菜谱精确地做一道菜。这能帮你快速找回内心的秩序和掌控感。</p></div></div></div></div>
     <div id="share-overlay" class="share-overlay" onclick="hideShareModal(event)"><div class="share-modal" onclick="event.stopPropagation()"><h3>分享这份平静</h3><p>也许你的朋友，也需要这份小小的慰藉。</p><div class="share-icons"><a href="#" class="share-icon" onclick="alert('假装分享到了微信好友~')"><svg viewBox="0 0 1024 1024" fill="#A8B8A6"><path d="M729.6 512c-73.6 0-134.4 57.6-134.4 128s60.8 128 134.4 128c73.6 0 134.4-57.6 134.4-128s-60.8-128-134.4-128z m-432 0c-73.6 0-134.4 57.6-134.4 128s60.8 128 134.4 128c73.6 0 134.4-57.6 134.4-128s-60.8-128-134.4-128z m-12.8 384h-2.24c-192 0-348.8-156.8-348.8-348.8s156.8-348.8 348.8-348.8c182.4 0 332.8 144 348.8 326.4V512c0 105.6-86.4 192-192 192h-12.8c-32 0-57.6 25.6-57.6 57.6s25.6 57.6 57.6 57.6h12.8c169.6 0 307.2-137.6 307.2-307.2V502.4C880.64 288 710.4 96 512 96S143.36 288 128 502.4v9.6c0 192 156.8 348.8 348.8 348.8h2.24c32 0 57.6-25.6 57.6-57.6s-25.6-57.6-57.6-57.6z"></path></svg><span>微信好友</span></a><a href="#" class="share-icon" onclick="alert('假装分享到了朋友圈~')"><svg viewBox="0 0 1024 1024" fill="#A8B8A6"><path d="M704 640a32 32 0 1 1 0 64 32 32 0 0 1 0-64zM512 0C229.2 0 0 229.2 0 512s229.2 512 512 512 512-229.2 512-512S794.8 0 512 0zm320 544c0 4.2-0.2 8.4-0.6 12.6-2.2 20-10.6 38.8-24.4 54.4-13.8 15.6-32.6 27.2-54.6 33.6-4.6 1.4-9.2 2.4-14 3.4-134.2 28-270.8-70.2-270.8-217.4 0-128.4 82.8-211.2 211.2-211.2 128.4 0 211.2 82.8 211.2 211.2 0 8.8-0.6 17.6-2 26.2z m-384-32a64 64 0 1 1 0-128 64 64 0 0 1 0 128zm-128 0a64 64 0 1 1 0-128 64 64 0 0 1 0 128z"></path></svg><span>朋友圈</span></a></div><button id="copy-btn" class="copy-link-btn" onclick="copyLink(this)">复制链接</button></div></div>
-    `;
-    // 在实际浏览器环境中，我们会将上面的 fullHtml 插入到 container 中
-    // 但因为这是一个模拟，你只需要复制最上面那个大的代码块即可。
+</div>
+<script>
+    function showScreen(screenId){const screens=document.querySelectorAll('.screen');screens.forEach(screen=>{screen.classList.remove('active');});const activeScreen=document.getElementById(screenId);if(activeScreen){activeScreen.classList.add('active');}}
+    function revealActions(buttonElement){const resultCard=buttonElement.closest('.result-card');const actionsContainer=resultCard.querySelector('.actions-container');const arrowIcon=buttonElement.querySelector('.arrow-icon');const buttonText=buttonElement.querySelector('span');actionsContainer.classList.toggle('visible');arrowIcon.classList.toggle('rotated');if(actionsContainer.classList.contains('visible')){buttonText.textContent='收起小方法';}else{buttonText.textContent='试试这些小方法';}}
+    const shareOverlay=document.getElementById('share-overlay');function showShareModal(){if(shareOverlay){shareOverlay.classList.add('visible');}}
+    function hideShareModal(event){if(event.target===shareOverlay){shareOverlay.classList.remove('visible');}}
+    function copyLink(button){navigator.clipboard.writeText(window.location.href).then(()=>{button.textContent='已复制！';setTimeout(()=>{button.textContent='复制链接';},1500);}).catch(err=>{alert('复制失败，您的浏览器可能不支持此功能。');console.error('Copy failed',err);});}
 </script>
 </body>
 </html>
